@@ -50,8 +50,36 @@ def addpost():
         'datetime': datetimeEntry.strftime("%B %d, %Y, %H:%M:%S")
     })
    
+    return redirect(url_for('index'))     
+
+@app.route('/update/<int:post_id>')
+def update(post_id):
+    post = db.get(doc_id= post_id)
+    return render_template('update.html' , post=post)       
+
+
+@app.route('/updatepost', methods=['POST'])
+def updatepost():
+    if request.method == 'POST':
+        title = request.form['title']
+        subtitle = request.form['subtitle']
+        entry = request.form['entry']
+        author = request.form['author']
+        datetimeEntry = datetime.now()
+        post_id = request.form['post_id']
+
+        db.update({
+            'title': title,
+            'subtitle': subtitle,
+            'entry': entry,
+            'author': author,
+            'datetime': datetimeEntry.strftime("%B %d, %Y, %H:%M:%S")
+            }
+            , doc_ids=[int(post_id)])
+   
     return redirect(url_for('index'))         
 
-
-if __name__ == '__main__':
-    app.run(debug=True)  
+@app.route('/delete/<int:post_id>')
+def delete(post_id):
+    db.remove(doc_ids=[post_id])
+    return redirect(url_for('index'))   

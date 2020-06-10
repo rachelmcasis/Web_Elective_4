@@ -1,0 +1,73 @@
+{% extends "base-template.html" %}
+{% block title %}Clean Blog - Start Bootstrap Theme{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+ 
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url('{{ url_for('static',filename = 'contact-bg.jpg') }}')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            <h1>New Journal</h1>
+            <span class="subheading">Share your thoughts now.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <p>Want to share something? Go ahead and write away!</p>
+        <!-- Contact Form - Enter your email address on line 19 of the mail/contact_me.php file to make this form work. -->
+        <!-- WARNING: Some web hosts do not allow emails to be sent through forms to common mail hosts like Gmail or Yahoo. It's recommended that you use a private domain email address! -->
+        <!-- To use the contact form, your site must be on a live web host with PHP! The form will not work locally! -->
+        <form name="addForm" id="addForm" method= "POST" action="{{url_for('updatepost') }}" novalidate>
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label>Title</label>
+              <input type="hidden" name="post_id" value="{{post.doc_id}}">
+              <input type="text" class="form-control" placeholder="Title" name="title" id="title" required data-validation-required-message="Please insert your title." value="{{post.title}}">
+              <p class="help-block text-danger"></p>
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label>Subtitle</label>
+              <input type="text" class="form-control" placeholder="Subtitle" name="subtitle" id="subtitle" required data-validation-required-message="Please insert your subtitle." value="{{post.subtitle}}">
+              <p class="help-block text-danger"></p>
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="form-group col-xs-12 floating-label-form-group controls">
+              <label>Author</label>
+              <input type="text" class="form-control" placeholder="Author" name="author" id="author" required data-validation-required-message="Please enter your name. " value="{{post.author}}">
+              <p class="help-block text-danger"></p>
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label>Entry</label>
+              <textarea rows="5" class="form-control" placeholder="Entry" name="entry" id="entry" required data-validation-required-message="Please insert your entry." >{{post.entry}}</textarea>
+              <p class="help-block text-danger"></p>
+            </div>
+          </div>
+          <br>
+          <div id="success"></div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary" id="sendMessageButton">Update</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  {% endblock %}
