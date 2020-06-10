@@ -1,26 +1,34 @@
 from flask import Flask, render_template, redirect, url_for, request
-from flask_sqlalchemy import sqlalchemy
 from datetime import datetime
+from tinydb import TinyDB, Query
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqllite://'
+db = TinyDB('db.json')
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
+def login():
+    error = None
+    if request.method == 'POST':
+        if request.form['email'] != 'admin@admin.app' or request.form['password'] != 'password123':
+            error = 'Invalid Credentials. Please try again.'
+        else:
+            return redirect(url_for('index'))
+    return render_template('login.html', error=error)
+
+@app.route('/index')
 def index():
-    return render_template('index.html')
+    all_post = db.all()
+    return render_template('index.html', posts = all_post)
 
 @app.route('/about')
 def about():
     return render_template('about.html')
 
-@app.route('/post')
-def post():
-    return render_template('post.html')
-
-@app.route('/contact')
-def contact():
-    return render_template('contact.html')       
+@app.route('/post/<int:post_id>')
+def post(post_id):
+    post = db.get(doc_id= post_id)
+    return render_template('post.html', post= post)
 
 @app.route('/add')
 def add():
@@ -34,18 +42,14 @@ def addpost():
     author = request.form['author']
     datetimeEntry = datetime.now()
     
-    data['post'].append({
-        'id': 
+    db.insert({
         'title': title,
         'subtitle': subtitle,
         'entry': entry,
         'author': author,
-        'datetime': datetimeEntry.strftime("%m/%d/%Y, %H:%M:%S")
+        'datetime': datetimeEntry.strftime("%B %d, %Y, %H:%M:%S")
     })
-
-    with open('journal_entry.txt', 'w') as outfile:
-        json.dump(data, outfile)
-
+   
     return redirect(url_for('index'))         
 
 
