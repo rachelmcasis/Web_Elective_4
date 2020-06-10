@@ -22,7 +22,7 @@
   <!-- Main Content -->
   <div class="container">
     <div class="row">
-      {% for post in posts %}
+      {% for post in posts|reverse %}
       <div class="col-lg-8 col-md-10 mx-auto">
         <div class="post-preview">
           <a href="{{ url_for('post', post_id=post.doc_id)}}">
@@ -40,8 +40,8 @@
         <hr>
       </div>
       <div class="col-lg-1 col-md-10 mx-auto">
-        <button class="btn btn-primary" >Edit</button>
-        <button class="btn btn-danger">Delete</button>
+        <a class="btn btn-primary" href="{{ url_for('update', post_id=post.doc_id)}}" role="button" >Edit</a>
+        <a class="btn btn-danger" href="{{ url_for('delete', post_id=post.doc_id)}}" role="button">Delete</a>
       </div>
       {% endfor %}
     </div>
