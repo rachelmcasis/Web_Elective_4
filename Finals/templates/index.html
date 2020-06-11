@@ -1,9 +1,11 @@
 {% extends "base-template.html" %}
-{% block title %}Clean Blog - Start Bootstrap Theme{% endblock %}
+{% block title %}Welcome to Journal{% endblock %}
 {% block head %}
+<link href="{{ url_for('static', filename='image_style.css') }}" rel="stylesheet">
   {{ super() }}
 {% endblock %}
 {% block content %}
+
   <!-- Page Header -->
   <header class="masthead" style="background-image: url('{{ url_for('static',filename = 'home-bg.jpg') }}')">
     <div class="overlay"></div>
@@ -22,7 +24,7 @@
   <!-- Main Content -->
   <div class="container">
     <div class="row">
-      {% for post in posts|reverse %}
+      {% for post in posts|sort(reverse=true, attribute="datetime") %}
       <div class="col-lg-8 col-md-10 mx-auto">
         <div class="post-preview">
           <a href="{{ url_for('post', post_id=post.doc_id)}}">
@@ -39,9 +41,9 @@
         </div>
         <hr>
       </div>
-      <div class="col-lg-1 col-md-10 mx-auto">
-        <a class="btn btn-primary" href="{{ url_for('update', post_id=post.doc_id)}}" role="button" >Edit</a>
-        <a class="btn btn-danger" href="{{ url_for('delete', post_id=post.doc_id)}}" role="button">Delete</a>
+      <div class="col-lg-1 col-md-10 mx-auto img-style">
+        <a class="btn" href="{{ url_for('update', post_id=post.doc_id)}}" role="button" ><img src="{{ url_for('static',filename = 'edit.png') }}" width="30" height="30"></a>
+        <a class="btn" href="{{ url_for('delete', post_id=post.doc_id)}}" role="button"><img src="{{ url_for('static',filename = 'delete.png') }}" width="32" height="32"></a>
       </div>
       {% endfor %}
     </div>
