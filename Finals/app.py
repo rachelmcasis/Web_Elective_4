@@ -47,7 +47,7 @@ def addpost():
         'subtitle': subtitle,
         'entry': entry,
         'author': author,
-        'datetime': datetimeEntry.strftime("%B %d, %Y, %H:%M:%S")
+        'datetime': datetimeEntry.strftime("%B %d, %Y %I:%M %p")
     })
    
     return redirect(url_for('index'))     
@@ -73,7 +73,7 @@ def updatepost():
             'subtitle': subtitle,
             'entry': entry,
             'author': author,
-            'datetime': datetimeEntry.strftime("%B %d, %Y, %H:%M:%S")
+            'datetime': datetimeEntry.strftime("%B %d, %Y %I:%M %p")
             }
             , doc_ids=[int(post_id)])
    

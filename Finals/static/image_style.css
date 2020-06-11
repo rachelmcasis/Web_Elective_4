@@ -3,3 +3,13 @@
     align-items: center;
     justify-content: center;
 }
+
+.btn_top{
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.img-input{
+    background: url(../static/search.png) no-repeat 7px 7px;
+    padding-left: 30px;
+}

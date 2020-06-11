@@ -22,7 +22,13 @@
   </header>
 
   <!-- Main Content -->
-  <div class="container">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto btn_top">
+        <button class="btn btn-primary" onclick="sort(value)">sort</button>
+        <input type="text" class="img-input" placeholder="Search"></input>
+      </div>
+    </div>
     <div class="row">
       {% for post in posts|sort(reverse=true, attribute="datetime") %}
       <div class="col-lg-8 col-md-10 mx-auto">
@@ -51,3 +57,5 @@
 
   <hr>
   {% endblock %}
+
+  <script src="{{ url_for('static', filename= 'sort.js?v=1') }}"></script>
