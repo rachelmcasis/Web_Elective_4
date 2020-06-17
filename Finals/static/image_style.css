@@ -9,7 +9,3 @@
     flex-direction: row-reverse;
 }
 
-.img-input{
-    background: url(../static/search.png) no-repeat 7px 7px;
-    padding-left: 30px;
-}
