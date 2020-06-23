@@ -1,5 +1,5 @@
 {% extends "base-template.html" %}
-{% block title %}Clean Blog - Start Bootstrap Theme{% endblock %}
+{% block title %} {{post.title}} {% endblock %}
 {% block head %}
   {{ super() }}
 {% endblock %}
@@ -24,10 +24,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
-        <p>Want to share something? Go ahead and write away!</p>
-        <!-- Contact Form - Enter your email address on line 19 of the mail/contact_me.php file to make this form work. -->
-        <!-- WARNING: Some web hosts do not allow emails to be sent through forms to common mail hosts like Gmail or Yahoo. It's recommended that you use a private domain email address! -->
-        <!-- To use the contact form, your site must be on a live web host with PHP! The form will not work locally! -->
+        <p>Need to redo something? Go ahead and write away!</p>
         <form name="addForm" id="addForm" method= "POST" action="{{url_for('updatepost') }}" novalidate>
           <div class="control-group">
             <div class="form-group floating-label-form-group controls">
